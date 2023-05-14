@@ -2,21 +2,18 @@ from data.menu_coffee import *
 
 def check_resources(user_answer):
     ingr=MENU[user_answer]["ingredients"]
-    coffe_resources_keys= list(ingr.keys())
-    coffee_machine_resouces_keys = list(resources.keys())
-    for j in range(len(coffe_resources_keys)):
-        if ingr[coffe_resources_keys[j]] <= resources[coffee_machine_resouces_keys[j]]:
-            pass
-        else:
-            print(f"Not enough {coffee_machine_resouces_keys[j]}")
+    for j in ingr:
+        if resources[j] < ingr[j]:
+            print(f"Not enough {j}")
             return False
-        return True
+    return True
+
 def place_money():
     user_money_quarters = int(input("Place your quarters, how many?: "))
     user_money_dimes = int(input("Place your dimes, how many?: "))
     user_money_nickles = int(input("Place your nickles, how many?: "))
     user_money_pennies = int(input("Place your pennies, how many?: "))
-    calculate = user_money_quarters * 0.25 + user_money_dimes * 0.10 + user_money_nickles * 0.05\
+    calculate = user_money_quarters * 0.25 +  user_money_dimes * 0.10 + user_money_nickles * 0.05\
                 + user_money_pennies * 0.01
     return calculate
 def transaction(user_answer):
@@ -45,9 +42,10 @@ def make_coffee(user_answer):
 
 def operations(user_answer):
     if check_resources(user_answer):
-        if transaction(user_answer):
-            if make_coffee(user_answer):
-                print("Take your coffee")
+        print("All good")
+        # if transaction(user_answer):
+        #     if make_coffee(user_answer):
+        #         print("Take your coffee")
 def start():
     while True:
         user_answer = input("What would you like?(espresso/latte/cappuccino): ")
